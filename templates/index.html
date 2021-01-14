@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <title>DEEPFOREST</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <header>
+        <div>
+            <h1>Deepforest</h1>
+            <p>Eksperimen Deepforest</p>
+        </div>
+    </header>
+    
+    <body>
+        <h2 class="text">Select file(s) to upload</h2>
+
+        <p>
+	        {% with messages = get_flashed_messages() %}
+	            {% if messages %}
+	            <script>
+		            var messages = {{ messages | safe }};
+		            for (var i=0; i<messages.length; i++) {
+		                alert(messages[i]);
+		            }
+	            </script>
+	            {% endif %}
+	        {% endwith %}
+        </p>
+
+        <form method="post" action="" enctype="multipart/form-data">
+            <dl>
+                <p>
+                    <input type="file" name="files" class="button3" autocomplete="off" required>
+                </p>
+            </dl>
+            <p>
+                <input type="submit" value="Upload" class="button4">
+            </p>
+        </form>
+
+        {% if filename %}
+        <p> "{{ filename }}"</p>
+            {% if '.tif' in filename %}
+            <div>
+                <script type="text/javascript" src="https://cdn.rawgit.com/seikichi/tiff.js/f03d7965/tiff.min.js"></script>
+                <script>
+                    var xhr = new XMLHttpRequest();
+                    xhr.responseType = 'arraybuffer';
+                    xhr.open('GET', "{{ url_for('static', filename=img_path) }}");
+                    xhr.onload = function (e) {
+                                        Tiff.initialize({
+                                            TOTAL_MEMORY: 500000000
+                                        });
+                                        var tiff = new Tiff({buffer: xhr.response});
+                                        var canvas = tiff.toCanvas();
+                                        document.body.appendChild(canvas);
+                                    };
+                    xhr.send(null);
+                </script>
+                <style>
+                    canvas {
+                            min-height: 60px;
+                            }
+                </style>
+            </div>
+            {% else -%}
+            <div>
+                <img src="{{ url_for('static', filename=img_path) }}">
+            </div>
+            {% endif%}
+        {% endif %}
+    </body>
+</html>
