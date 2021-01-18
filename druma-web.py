@@ -44,13 +44,15 @@ def home():
 
             res_image = load_image_as_np(img_path)
 
-            for i in range(0, len(detected_lines)):
-                rho = detected_lines[i][0][0]
-                theta = detected_lines[i][0][1]
-                draw_line(res_image, rho, theta)
+            if detected_lines is not None:
+                for i in range(0, len(detected_lines)):
+                    rho = detected_lines[i][0][0]
+                    theta = detected_lines[i][0][1]
+                    draw_line(res_image, rho, theta)
             
-            for box in boxes[['xmin', 'ymin', 'xmax', 'ymax']].values:
-                draw_box(res_image, box, [255,130,0], 3)
+            if boxes is not None:
+                for box in boxes[['xmin', 'ymin', 'xmax', 'ymax']].values:
+                    draw_box(res_image, box, [255,130,0], 3)
             
             final_img = save_np_image(res_image, file.filename)
             img_file_path = os.path.join('uploads/', final_img)

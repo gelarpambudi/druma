@@ -1,6 +1,6 @@
 header {
     padding: 15px;
-    background-color: #bfda48;
+    background-color: #4ae497;
     text-align: center;
     color: black;
     }
@@ -19,7 +19,7 @@ body {
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #ecce19;
+    background-color: #4ae497;
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px #999;
@@ -51,7 +51,7 @@ body {
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #ecce19;
+    background-color: #4ae497;
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px #999;
