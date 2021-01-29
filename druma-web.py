@@ -8,6 +8,7 @@ import threading
 import requests
 import json
 import time
+import concurrent
 
 from flask import request, render_template, session, redirect, flash
 from werkzeug.utils import secure_filename
@@ -28,10 +29,12 @@ def home():
         
         if file and allowed_file(file.filename):
             img_path = save_image(file)
-            input_img = {'image': open(img_path, 'rb')}
+            #input_img = {'image': open(img_path, 'rb')}
+            
 
+            
             #multithread request
-            threads = [api_request(input_img, url) for url in URL]
+            threads = [api_request(img_path, url) for url in URL]
             #start thread
             for thread in threads:
                 thread.start()
@@ -39,20 +42,47 @@ def home():
             for thread in threads:
                 thread.join()
             
-            detected_lines = threads[0].result
-            boxes = threads[1].result
-
+            detected_lines = threads[1].result
+            boxes = threads[0].result
+            
             res_image = load_image_as_np(img_path)
+
+            '''
+            #multithread request
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                res = [executor.submit(post_req, endpoint, input_img) for endpoint in URL]
+                concurrent.futures.wait(res)
+            
+            boxes = pd.read_json(json.dumps(res[1].result().json()), orient='index')
+            if json.load(json.dumps(res[0].result().json()))['lines'] != "No Line Detected":
+                detected_lines = np.array(json.load(json.dumps(res[0].result().json()))['lines'])
+            '''
+
+            a = []
+            b = []
 
             if detected_lines is not None:
                 for i in range(0, len(detected_lines)):
                     rho = detected_lines[i][0][0]
                     theta = detected_lines[i][0][1]
-                    draw_line(res_image, rho, theta)
+                    res = draw_line(res_image, rho, theta)
+                    a.append(res[0])
+                    b.append(res[1])
             
+            line_start = np.asarray(a, dtype=np.float32)
+            line_end = np.asarray(b, dtype=np.float32)
+            center_point = boxes[['xcenter','ycenter']].to_numpy()
+            
+            boxes['color'] = get_box_color(center_point, line_start, line_end)
+
             if boxes is not None:
-                for box in boxes[['xmin', 'ymin', 'xmax', 'ymax']].values:
-                    draw_box(res_image, box, [255,130,0], 3)
+                for box in boxes[['xmin', 'ymin', 'xmax', 'ymax', 'color']].values:
+                    if box[-1] == 'red':
+                        draw_box(res_image, box[:4], [0,0,255], 2)
+                    elif box[-1] == 'yellow':
+                        draw_box(res_image, box[:4], [0,255,255], 2)
+                    elif box[-1] == 'green':
+                        draw_box(res_image, box[:4], [0,255,0], 2)
             
             final_img = save_np_image(res_image, file.filename)
             img_file_path = os.path.join('uploads/', final_img)
