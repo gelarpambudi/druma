@@ -47,35 +47,23 @@ def home():
             
             res_image = load_image_as_np(img_path)
 
-            '''
-            #multithread request
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                res = [executor.submit(post_req, endpoint, input_img) for endpoint in URL]
-                concurrent.futures.wait(res)
-            
-            boxes = pd.read_json(json.dumps(res[1].result().json()), orient='index')
-            if json.load(json.dumps(res[0].result().json()))['lines'] != "No Line Detected":
-                detected_lines = np.array(json.load(json.dumps(res[0].result().json()))['lines'])
-            '''
-
+           
             a = []
             b = []
 
-            if detected_lines is not None:
+            if detected_lines is not None and boxes is not None:
                 for i in range(0, len(detected_lines)):
                     rho = detected_lines[i][0][0]
                     theta = detected_lines[i][0][1]
                     res = draw_line(res_image, rho, theta)
                     a.append(res[0])
                     b.append(res[1])
-            
-            line_start = np.asarray(a, dtype=np.float32)
-            line_end = np.asarray(b, dtype=np.float32)
-            center_point = boxes[['xcenter','ycenter']].to_numpy()
-            
-            boxes['color'] = get_box_color(center_point, line_start, line_end)
 
-            if boxes is not None:
+                line_start = np.asarray(a, dtype=np.float32)
+                line_end = np.asarray(b, dtype=np.float32)
+                center_point = boxes[['xcenter','ycenter']].to_numpy()
+            
+                boxes['color'] = get_box_color(center_point, line_start, line_end)
                 for box in boxes[['xmin', 'ymin', 'xmax', 'ymax', 'color']].values:
                     if box[-1] == 'red':
                         draw_box(res_image, box[:4], [0,0,255], 2)
@@ -83,8 +71,20 @@ def home():
                         draw_box(res_image, box[:4], [0,255,255], 2)
                     elif box[-1] == 'green':
                         draw_box(res_image, box[:4], [0,255,0], 2)
+
+            elif detected_lines is None and boxes is not None:
+                for box in boxes[['xmin', 'ymin', 'xmax', 'ymax']].values:
+                    draw_box(res_image, box, [0,255,0], 2)
+
+            elif detected_lines is not None and boxes is None:
+                for i in range(0, len(detected_lines)):
+                    rho = detected_lines[i][0][0]
+                    theta = detected_lines[i][0][1]
+                    res = draw_line(res_image, rho, theta)
+            else:
+                pass
             
-            final_img = save_np_image(res_image, file.filename)
+            final_img = save_res_image(res_image, file.filename)
             img_file_path = os.path.join('uploads/', final_img)
 
             print("Execution time: ", time.time()-start)

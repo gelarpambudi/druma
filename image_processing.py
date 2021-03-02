@@ -14,14 +14,17 @@ def load_image_as_np(img_file):
     img = Image.open(img_file)
     return np.array(img)
 
+
 def save_image(img_file):
     filename = secure_filename(img_file.filename)
     img_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-def save_np_image(np_image, filename):
+
+def save_res_image(np_image, filename):
     cv.imwrite(os.path.join(app.config['UPLOAD_FOLDER'], 'result-'+filename), np_image)
     return 'result-' + filename 
+
 
 def draw_line(image, rho, theta):
     a = np.cos(theta)
@@ -33,9 +36,11 @@ def draw_line(image, rho, theta):
     cv.line(image, (pt1[0],pt1[1]), (pt2[0],pt2[1]), (255,0,0), 2, cv.LINE_AA)
     return pt1,pt2
 
-def draw_box(image, box, color, thickness=1):
+
+def draw_box(image, box, color=[0,255,0], thickness=1):
     b = np.array(box).astype(int)
     cv.rectangle(image, (b[0], b[1]), (b[2], b[3]), color, thickness, cv.LINE_AA)
+
 
 def get_shortest_distance(p, a, b, resolution=0.5):
     d_ba = b - a
@@ -47,6 +52,7 @@ def get_shortest_distance(p, a, b, resolution=0.5):
     c = d_pa[:, 0] * d[:, 1] - d_pa[:, 1] * d[:, 0]
     distance = np.hypot(h,c).min()
     return distance * resolution
+
 
 def get_box_color(center_point, line_start, line_end):
     color = []
