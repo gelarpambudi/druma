@@ -1,5 +1,5 @@
 pandas
-opencv
+opencv-python
 numpy
 flask
 pillow
