@@ -7,8 +7,8 @@ from image_processing import save_image
 
 ALLOWED_EXTENSIONS = set(['tiff', 'tif', 'jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG', 'TIF', 'TIFF'])
 URL = [
-        'http://localhost:5555/api/predict-deepforest',
-        'http://localhost:4444/api/hough-transform'
+        'http://deepforest.druma.com:5555/api/predict-deepforest',
+        'http://hough.druma.com:4444/api/hough-transform'
         ]
 
 
