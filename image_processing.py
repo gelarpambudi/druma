@@ -11,8 +11,8 @@ DANGER_DIST = 15
 CAUTION_DIST = 20
 
 def load_image_as_np(img_file):
-    img = Image.open(img_file)
-    return np.array(img)
+    img = cv.imread(img_file)
+    return img
 
 
 def save_image(img_file):

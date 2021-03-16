@@ -7,8 +7,8 @@ from image_processing import save_image
 
 ALLOWED_EXTENSIONS = set(['tiff', 'tif', 'jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG', 'TIF', 'TIFF'])
 URL = [
-        'http://192.168.88.6:5555/api/predict-deepforest',
-        'http://192.168.88.5:4444/api/hough-transform'
+        'http://localhost:5555/api/predict-deepforest',
+        'http://localhost:4444/api/hough-transform'
         ]
 
 
@@ -28,8 +28,9 @@ class api_request(Thread):
         elif self.url == URL[1]:
             r = requests.post(self.url, files={'image': open(self.input_image, 'rb')})
             data = json.dumps(r.json())
-            if data is not None and json.loads(data)["lines"] != "No Line Detected":
-                self.result = np.array(json.loads(data)["lines"])
+            #if data is not None and json.loads(data)["lines"] != "No Line Detected":
+            #    self.result = np.array(json.loads(data)["lines"])
+            self.result = pd.read_json(data, orient='index')
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
