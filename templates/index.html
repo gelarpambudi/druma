@@ -39,7 +39,8 @@
         </form>
 
         {% if filename %}
-        <p> "{{ filename }}"</p>
+        <p> Merah: "{{ box_count[0] }}"</p>
+        <p> Kuning: "{{ box_count[1] }}"</p>
             {% if '.tif' in filename %}
             <div>
                 <script type="text/javascript" src="https://cdn.rawgit.com/seikichi/tiff.js/f03d7965/tiff.min.js"></script>

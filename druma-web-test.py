@@ -82,12 +82,16 @@ def home():
             else:
                 pass
             
+            box_count = [
+                boxes[boxes.color == 'red'].shape[0],
+                boxes[boxes.color == 'yellow'].shape[0]
+            ]
             final_img = save_res_image(res_image, file.filename)
             img_file_path = os.path.join('uploads/', final_img)
 
             print("Execution time: ", time.time()-start)
 
-            return render_template("index.html", img_path=img_file_path, filename=final_img)
+            return render_template("index.html", img_path=img_file_path, filename=final_img, box_count=box_count)
         else:
             flash(u'Allowed image types are -> png, jpg, jpeg, tif')
             return redirect(request.url)
