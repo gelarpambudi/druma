@@ -83,8 +83,9 @@ def home():
                 pass
             
             box_count = [
-                boxes[boxes.color == 'red'].shape[0],
-                boxes[boxes.color == 'yellow'].shape[0]
+                0 if boxes[boxes.color == 'red'].shape[0] is None else boxes[boxes.color == 'red'].shape[0],
+                0 if boxes[boxes.color == 'yellow'].shape[0] is None else boxes[boxes.color == 'yellow'].shape[0],
+                0 if boxes[boxes.color == 'green'].shape[0] is None else boxes[boxes.color == 'green'].shape[0]
             ]
             final_img = save_res_image(res_image, file.filename)
             img_file_path = os.path.join('uploads/', final_img)
