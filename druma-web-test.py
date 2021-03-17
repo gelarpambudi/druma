@@ -27,7 +27,7 @@ def home():
 
         file = request.files['files']
         patch_size = request.form['patch_size']
-        spatial_resolution = request.form['spatial_resolution']
+        spatial_resolution = float(request.form['spatial_resolution'])
         
         if file and allowed_file(file.filename):
             img_path = save_image(file)
