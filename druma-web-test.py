@@ -32,7 +32,7 @@ def home():
         if file and allowed_file(file.filename):
             img_path = save_image(file)
             
-            threads = [api_request(img_path, url) for url in URL]
+            threads = [api_request(img_path, url, patch_size) for url in URL]
             for thread in threads:
                 thread.start()
             for thread in threads:
