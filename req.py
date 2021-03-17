@@ -14,19 +14,28 @@ URL = [
 
 class api_request(Thread):
     
-    def __init__ (self, file, url):
+    def __init__ (self, file, url, patch):
         self.result = None
         self.input_image = file
         self.url = url
+        self.patch = patch
         super(api_request, self).__init__()
 
     def run(self):
         if self.url == URL[0]:
-            r = requests.post(self.url, files={'image': open(self.input_image, 'rb')})
+            r = requests.post(
+                self.url,
+                files={'image': open(self.input_image, 'rb')},
+                data={'patch_size': self.patch}
+                )
             data = json.dumps(r.json())
             self.result = pd.read_json(data, orient='index')
         elif self.url == URL[1]:
-            r = requests.post(self.url, files={'image': open(self.input_image, 'rb')})
+            r = requests.post(
+                self.url,
+                files={'image': open(self.input_image, 'rb')},
+                data={'patch_size': self.patch}
+                )
             data = json.dumps(r.json())
             #if data is not None and json.loads(data)["lines"] != "No Line Detected":
             #    self.result = np.array(json.loads(data)["lines"])

@@ -76,4 +76,13 @@ body {
     transform: translateY(4px);
   }
 
+  .input_form:focus {
+    border: 3px solid #555;
+  }
+
+  .input_form{
+    margin-top: 30px;
+    width: 200px;
+  }
+
   

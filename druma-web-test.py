@@ -26,6 +26,8 @@ def home():
             return redirect(request.url)
 
         file = request.files['files']
+        patch_size = request.form['patch_size']
+        spatial_resolution = request.form['spatial_resolution']
         
         if file and allowed_file(file.filename):
             img_path = save_image(file)
@@ -59,7 +61,7 @@ def home():
                 line_end = np.asarray(line_end,dtype=np.float32)
                 center_point = boxes[['xcenter','ycenter']].to_numpy()
             
-                boxes['color'] = get_box_color(center_point, line_start, line_end)
+                boxes['color'] = get_box_color(center_point, line_start, line_end, spatial_resolution)
                 for box in boxes[['xmin', 'ymin', 'xmax', 'ymax', 'color']].values:
                     if box[-1] == 'red':
                         draw_box(res_image, box[:4], [0,0,255], 2)

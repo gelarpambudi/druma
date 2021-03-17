@@ -54,10 +54,10 @@ def get_shortest_distance(p, a, b, resolution=0.5):
     return distance * resolution
 
 
-def get_box_color(center_point, line_start, line_end):
+def get_box_color(center_point, line_start, line_end, spat_res):
     color = []
     for i in range(0, center_point.shape[0]):
-        distance = get_shortest_distance(center_point[i], line_start, line_end)
+        distance = get_shortest_distance(center_point[i], line_start, line_end, spat_res)
         if ( distance >= 0) and (distance <= DANGER_DIST):
             color.append('red')
         elif (distance > DANGER_DIST) and (distance <= CAUTION_DIST):
