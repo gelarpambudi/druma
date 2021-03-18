@@ -16,9 +16,21 @@ from app import app
 from image_processing import *
 from req import *
 
-
-@app.route("/", methods=['GET','POST'])
+@app.route("/", methods=['GET'])
+@app.route("/home", methods=['GET'])
 def home():
+    if request.method == "GET":
+        return render_template("druma.html")
+
+
+@app.route("/faq", methods=['GET'])
+def faq():
+    if request.method == "GET":
+        return render_template("faq.html")
+
+
+@app.route("/predict", methods=['GET','POST'])
+def predict():
     if request.method == "POST":
         start = time.time()
         if 'files' not in request.files:
@@ -33,11 +45,13 @@ def home():
             img_path = save_image(file)
             
             threads = [api_request(img_path, url, patch_size) for url in URL]
+            print("=====SENDING REQUEST=====")
             for thread in threads:
                 thread.start()
             for thread in threads:
                 thread.join()
-            
+            print("=====RESPONSE RECEIVED=====")
+
             detected_lines = threads[1].result
             boxes = threads[0].result
             
@@ -91,16 +105,17 @@ def home():
             ]
             final_img = save_res_image(res_image, file.filename)
             img_file_path = os.path.join('uploads/', final_img)
+            print("=====DONE PROCESSING=====")
 
             print("Execution time: ", time.time()-start)
 
-            return render_template("index.html", img_path=img_file_path, filename=final_img, box_count=box_count)
+            return render_template("predict.html", img_path=img_file_path, filename=final_img, box_count=box_count)
         else:
             flash(u'Allowed image types are -> png, jpg, jpeg, tif')
             return redirect(request.url)
 
     else:
-        return render_template("index.html")
+        return render_template("predict.html")
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port='7777')

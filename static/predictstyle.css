@@ -1,0 +1,88 @@
+header {
+    padding: 15px;
+    background-color: #4ae497;
+    text-align: center;
+    color: black;
+    }
+body {
+    text-align: center;
+}
+.text {
+    font-size: medium;
+
+}
+
+.button3 {
+    padding: 15px 25px;
+    font-size: 15px;
+    text-align: justify;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #4ae497;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    top: 30%;
+  
+    /*
+    display:block;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    */
+    margin:0 auto;
+    margin-top: 15px;
+    display:block;
+  
+  }
+  
+  .button3:hover {background-color: #f5350c}
+  
+  .button3:active {
+    background-color: # #f5350c ;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  
+  .button4 {
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #4ae497;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    top: 30%;
+  
+  
+    /*
+    display:block;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    */
+    margin:0 auto;
+    display:block;
+  
+  }
+  
+  .button4:hover {background-color: #f5350c}
+  
+  .button4:active {
+    background-color: # #f5350c ;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  .input_form:focus {
+    border: 3px solid #555;
+  }
+
+  .input_form{
+    margin-top: 30px;
+    width: 200px;
+  }
+
+  
