@@ -67,7 +67,7 @@ def predict():
                             (row["pt1"][0],row["pt1"][1]),
                             (row["pt2"][0],row["pt2"][1]),
                             color=[255,0,0],
-                            thickness=1)
+                            thickness=2)
                     line_start.append(row["pt1"])
                     line_end.append(row["pt2"])
 
@@ -94,7 +94,7 @@ def predict():
                             (row["pt1"][0],row["pt1"][1]),
                             (row["pt2"][0],row["pt2"][1]),
                             color=[255,0,0],
-                            thickness=1)
+                            thickness=2)
             else:
                 pass
             
