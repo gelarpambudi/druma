@@ -3,6 +3,7 @@ const dropArea = document.querySelector(".drag-area"),
 dragText = dropArea.querySelector("header"),
 button = dropArea.querySelector("button"),
 input = dropArea.querySelector("input");
+icon = dropArea.querySelector(".icon");
 let file; //this is a global variable and we'll use it inside multiple functions
 
 button.onclick = ()=>{
@@ -48,13 +49,19 @@ function showFile(){
       fileReader.onload = ()=>{
         let fileURL = fileReader.result; //passing user file source in fileURL variable
         let imgTag = `<img src="${fileURL}" alt="">`; //creating an img tag and passing user selected file source inside src attribute
-        dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
+        dragText.style.visibility = "hidden";
+        button.style.visibility = "hidden";
+        icon.style.visibility = "hidden";
+        //dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
       }
       fileReader.readAsDataURL(file);
     }else if (fileType == validExtensions[3]){
       fileReader.onload = ()=>{
-        let imgTag = `<p> ${fileName}</p>`; 
-        dropArea.innerHTML = imgTag; 
+        let imgName = `<p> ${fileName}</p>`; 
+        dragText.style.visibility = "hidden";
+        button.style.visibility = "hidden";
+        icon.style.visibility = "hidden";
+        //dropArea.innerHTML = imgTag; 
       }
       fileReader.readAsDataURL(file);
     }
