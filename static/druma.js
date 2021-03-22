@@ -3,6 +3,7 @@ const dropArea = document.querySelector(".drag-area"),
 dragText = dropArea.querySelector("header"),
 button = dropArea.querySelector("button"),
 input = dropArea.querySelector("input");
+span = dropArea.querySelector("span");
 icon = dropArea.querySelector(".icon");
 let file; //this is a global variable and we'll use it inside multiple functions
 
@@ -46,21 +47,19 @@ function showFile(){
   if(validExtensions.includes(fileType)){ //if user selected file is an image file
     let fileReader = new FileReader(); //creating new FileReader object
     if ((fileType == validExtensions[0]) || (fileType == validExtensions[1]) || (fileType == validExtensions[2])) {
+      dragText.style.visibility = "hidden";
+      button.style.visibility = "hidden";
+      icon.style.visibility = "hidden";
+      span.style.visibility = "hidden";
       fileReader.onload = ()=>{
         let fileURL = fileReader.result; //passing user file source in fileURL variable
         let imgTag = `<img src="${fileURL}" alt="">`; //creating an img tag and passing user selected file source inside src attribute
-        dragText.style.visibility = "hidden";
-        button.style.visibility = "hidden";
-        icon.style.visibility = "hidden";
         //dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
       }
       fileReader.readAsDataURL(file);
     }else if (fileType == validExtensions[3]){
       fileReader.onload = ()=>{
         let imgName = `<p> ${fileName}</p>`; 
-        dragText.style.visibility = "hidden";
-        button.style.visibility = "hidden";
-        icon.style.visibility = "hidden";
         //dropArea.innerHTML = imgTag; 
       }
       fileReader.readAsDataURL(file);
