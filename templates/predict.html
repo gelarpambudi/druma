@@ -38,11 +38,11 @@
       <header>Drag & Drop to Upload File</header>
       <span>OR</span>
       <button>Browse File</button>
-      <input type="file" name="files" hidden>
+      <input type="file" name="files" form="predict_form" hidden>
     </div>
 
     <script src="{{ url_for('static', filename='druma.js') }}"> </script> 
-    <form method="post" action="" enctype="multipart/form-data">
+    <form id="predict_form" method="post" action="" enctype="multipart/form-data">
       <dl>
           <p>
               <input type="text" name="patch_size" placeholder="Patch Size" class="input_form" required>
