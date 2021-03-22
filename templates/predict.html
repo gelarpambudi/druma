@@ -1,77 +1,105 @@
-<!doctype html>
-<html>
-    <head>
-        <title>DRUMA</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='predictstyle.css') }}">
-    </head>
-    <header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='predictstyle.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title> Druma </title>
+</head>
+<body>
+  <header class="showcase">
+    <p>
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <script>
+            var messages = {{ messages | safe }};
+            for (var i=0; i<messages.length; i++) {
+                alert(messages[i]);
+            }
+          </script>
+          {% endif %}
+      {% endwith %}
+    </p>
+    <div class="link">
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('predict') }}">Predict</a></li>
+        <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+        <img src="{{ url_for('static', filename='logodruma.png') }}" class="cobalogo" alt="Druma">
+      </ul>
+    </div>
+  </header>
+  <div class="upload">
+    <div class="drag-area">
+      <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+      <header>Drag & Drop to Upload File</header>
+      <span>OR</span>
+      <button>Browse File</button>
+      <input type="file" hidden>
+    </div>
+
+    <script src="{{ url_for('static', filename='druma.js') }}"> </script> 
+    <form method="post" action="" enctype="multipart/form-data">
+      <dl>
+          <p>
+              <input type="text" name="patch_size" placeholder="Patch Size" class="input_form" required>
+              <input type="text" name="spatial_resolution" placeholder="Spatial Resolution" class="input_form" required>
+          </p>
+      </dl>
+      <p>
+          <input type="submit" value="Upload" class="button">
+      </p>
+    </form>
+    {% if filename %}
+    <table>
+      <tr>
+          <th>Color</th>
+          <td><b>Red</td></b>
+          <td><b>Yellow</td></b>
+          <td><b>Green</td></b>
+        </tr>
+        <tr>
+          <th>Amount</th>
+          <td>{{ box_count[0] }}</td>
+          <td> {{ box_count[1] }}</td>
+          <td> {{ box_count[1] }}</td>
+        </tr>
+    </table>
+        {% if '.tif' in filename %}
         <div>
-            <h1>DRUMA</h1>
-            <p>Eksperimen Druma</p>
+          <script type="text/javascript" src="https://cdn.rawgit.com/seikichi/tiff.js/f03d7965/tiff.min.js"></script>
+          <script>
+              var xhr = new XMLHttpRequest();
+              xhr.responseType = 'arraybuffer';
+              xhr.open('GET', "{{ url_for('static', filename=img_path) }}");
+              xhr.onload = function (e) {
+                                  Tiff.initialize({
+                                      TOTAL_MEMORY: 500000000
+                                  });
+                                  var tiff = new Tiff({buffer: xhr.response});
+                                  var canvas = tiff.toCanvas();
+                                  document.body.appendChild(canvas);
+                              };
+              xhr.send(null);
+          </script>
+          <style>
+              canvas {
+                      min-height: 60px;
+                      }
+          </style>
         </div>
-    </header>
-    
-    <body>
-        <h2 class="text">Select file(s) to upload</h2>
-
-        <p>
-	        {% with messages = get_flashed_messages() %}
-	            {% if messages %}
-	            <script>
-		            var messages = {{ messages | safe }};
-		            for (var i=0; i<messages.length; i++) {
-		                alert(messages[i]);
-		            }
-	            </script>
-	            {% endif %}
-	        {% endwith %}
-        </p>
-
-        <form method="post" action="" enctype="multipart/form-data">
-            <dl>
-                <p>
-                    <input type="file" name="files" class="button3" autocomplete="off" required>
-                    <input type="text" name="patch_size" placeholder="Patch Size" class="input_form" required>
-                    <input type="text" name="spatial_resolution" placeholder="Spatial Resolution" class="input_form" required>
-                </p>
-            </dl>
-            <p>
-                <input type="submit" value="Upload" class="button4">
-            </p>
-        </form>
-
-        {% if filename %}
-        <p> Merah: {{ box_count[0] }}</p>
-        <p> Kuning: {{ box_count[1] }}</p>
-        <p> Hijau: {{ box_count[2] }}</p>
-            {% if '.tif' in filename %}
-            <div>
-                <script type="text/javascript" src="https://cdn.rawgit.com/seikichi/tiff.js/f03d7965/tiff.min.js"></script>
-                <script>
-                    var xhr = new XMLHttpRequest();
-                    xhr.responseType = 'arraybuffer';
-                    xhr.open('GET', "{{ url_for('static', filename=img_path) }}");
-                    xhr.onload = function (e) {
-                                        Tiff.initialize({
-                                            TOTAL_MEMORY: 500000000
-                                        });
-                                        var tiff = new Tiff({buffer: xhr.response});
-                                        var canvas = tiff.toCanvas();
-                                        document.body.appendChild(canvas);
-                                    };
-                    xhr.send(null);
-                </script>
-                <style>
-                    canvas {
-                            min-height: 60px;
-                            }
-                </style>
-            </div>
-            {% else -%}
-            <div>
-                <img src="{{ url_for('static', filename=img_path) }}">
-            </div>
-            {% endif%}
-        {% endif %}
-    </body>
+        {% else -%}
+        <div>
+          <img src="{{ url_for('static', filename=img_path) }}">
+        </div>
+        {% endif%}
+    {% endif %}
+  </div>
+  <footer class="center bg-dark">
+    <p>Druma &copy; 2021</p>
+  </footer>
+</body>
 </html>
