@@ -53,14 +53,16 @@ function showFile(){
       span.style.visibility = "hidden";
       fileReader.onload = ()=>{
         let fileURL = fileReader.result; //passing user file source in fileURL variable
-        let imgTag = `<img src="${fileURL}" alt="">`; //creating an img tag and passing user selected file source inside src attribute
-        //dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
+        let imgTag = document.createElement("img");
+        imgTag.src = `${fileURL}`; //creating an img tag and passing user selected file source inside src attribute
+        dropArea.appendChild(imgTag);
       }
       fileReader.readAsDataURL(file);
     }else if (fileType == validExtensions[3]){
       fileReader.onload = ()=>{
-        let imgName = `<p> ${fileName}</p>`; 
-        //dropArea.innerHTML = imgTag; 
+        let imgName = document.createElement("P");
+        imgName.innerText = `<p> ${fileName}</p>`; 
+        dropArea.appendChild(imgName)
       }
       fileReader.readAsDataURL(file);
     }
