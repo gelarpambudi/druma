@@ -33,6 +33,7 @@
     </div>
   </header>
   <div class="upload">
+    <form class="predict_form" method="post" action="" enctype="multipart/form-data"></form>
     <div class="drag-area">
       <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
       <header>Drag & Drop to Upload File</header>
@@ -41,8 +42,7 @@
       <input type="file" name="files" form="predict_form" hidden>
     </div>
 
-    <script src="{{ url_for('static', filename='druma.js') }}"> </script> 
-    <form id="predict_form" method="post" action="" enctype="multipart/form-data">
+      <script src="{{ url_for('static', filename='druma.js') }}"> </script> 
       <dl>
           <p>
               <input type="text" name="patch_size" placeholder="Patch Size" class="input_form" required>
