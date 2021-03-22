@@ -1,4 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-    THIS IS FAQ PAGE
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='faqstyle.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title> Druma </title>
+</head>
+<body>
+  <header class="showcase">
+    <div class="link">
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('predict') }}">Predict</a></li>
+        <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+        <img src="{{ url_for('static', filename='logodruma.png') }}" class="cobalogo" alt="Druma">
+      </ul>
+    </div>
+  </header>
+  <div class=green>
+    <div class="wrapper">
+      <!-- Accordion Heading One -->
+      <div class="parent-tab">
+        <input type="checkbox" name="tab" id="tab-1" checked>
+        <label for="tab-1">
+          <span>Accordion Heading One</span>
+          <div class="icon"><i class="fas fa-plus"></i></div>
+        </label>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing thelit. Quam, repellendus facere, id porro magnam blanditiiss quoteos dolores ratione quidem ipsam esse quos pariatur, repellat obcaecati!</p>
+        </div>
+      </div>
+  
+      <!-- Accordion Heading Two -->
+      <div class="parent-tab">
+        <input type="checkbox" name="tab" id="tab-2">
+        <label for="tab-2">
+          <span>Accordion Heading Two</span>
+          <div class="icon"><i class="fas fa-plus"></i></div>
+        </label>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing thelit. Quam, repellendus facere, id porro magnam blanditiiss quoteos dolores ratione quidem ipsam esse quos pariatur, repellat obcaecati!</p>
+        </div>
+      </div>
+  
+      <!-- Accordion Heading Three -->
+      <div class="parent-tab tab-3">
+        <input type="checkbox" name="tab" id="tab-3">
+        <label for="tab-3" class="tab-3">
+          <span>Accordion Heading Three</span>
+          <div class="icon"><i class="fas fa-plus"></i></div>
+        </label>
+        <div class="content">
+          <!-- Sub Heading One -->
+          <div class="child-tab">
+            <input type="checkbox" name="sub-tab" id="tab-4">
+            <label for="tab-4">
+              <span>Sub Heading One</span>
+              <div class="icon"><i class="fas fa-plus"></i></div>
+            </label>
+            <div class="sub-content">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing thelit dolor. Utfacilis labore, exercitationem fuga minima a illo modi vitaerse dignissimos? Vero?</p>
+            </div>
+          </div>
+          <!-- Sub Heading Two -->
+          <div class="child-tab">
+            <input type="checkbox" name="sub-tab" id="tab-5">
+            <label for="tab-5">
+              <span>Sub Heading Two</span>
+              <div class="icon"><i class="fas fa-plus"></i></div>
+            </label>
+            <div class="sub-content">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing thelit dolor. Utfacilis labore, exercitationem fuga minima a illo modi vitaerse dignissimos? Vero?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="center bg-dark">
+    <p>Druma &copy; 2021</p>
+  </footer>
+</body>
 </html>
+
