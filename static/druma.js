@@ -45,12 +45,12 @@ function showFile(){
   let fileName = file.name;
   let validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/tiff"]; //adding some valid image extensions in array
   if(validExtensions.includes(fileType)){ //if user selected file is an image file
+    dragText.style.visibility = "hidden";
+    button.style.visibility = "hidden";
+    icon.style.visibility = "hidden";
+    span.style.visibility = "hidden";
     let fileReader = new FileReader(); //creating new FileReader object
     if ((fileType == validExtensions[0]) || (fileType == validExtensions[1]) || (fileType == validExtensions[2])) {
-      dragText.style.visibility = "hidden";
-      button.style.visibility = "hidden";
-      icon.style.visibility = "hidden";
-      span.style.visibility = "hidden";
       fileReader.onload = ()=>{
         let fileURL = fileReader.result; //passing user file source in fileURL variable
         let imgTag = document.createElement("img");
@@ -61,7 +61,7 @@ function showFile(){
     }else if (fileType == validExtensions[3]){
       fileReader.onload = ()=>{
         let imgName = document.createElement("P");
-        imgName.innerText = `<p> ${fileName}</p>`; 
+        imgName.innerText = `${fileName}`; 
         dropArea.appendChild(imgName)
       }
       fileReader.readAsDataURL(file);
