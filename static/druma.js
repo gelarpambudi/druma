@@ -52,16 +52,14 @@ function showFile(){
     if ((fileType == validExtensions[0]) || (fileType == validExtensions[1]) || (fileType == validExtensions[2])) {
       fileReader.onload = ()=>{
         let fileURL = fileReader.result; //passing user file source in fileURL variable
-        //let imgTag = document.createElement("img");
         let imgTag = `<img src="${fileURL}" alt="">`; //creating an img tag and passing user selected file source inside src attribute
-        dragText.innerHTML = imgTag;
+        dropArea.innerHTML = imgTag;
       }
       fileReader.readAsDataURL(file);
     }else if (fileType == validExtensions[3]){
       fileReader.onload = ()=>{
-        //let imgName = document.createElement("P");
         let imgName= `<p>${fileName}</p>`; 
-        dragText.innerHTML = imgName;
+        dropArea.innerHTML = imgName;
       }
       fileReader.readAsDataURL(file);
     }
