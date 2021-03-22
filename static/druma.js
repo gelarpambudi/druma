@@ -1,8 +1,8 @@
 //selecting all required elements
 const dropArea = document.querySelector(".drag-area"),
 dragText = dropArea.querySelector("header"),
-button = document.querySelector("button"),
-input = dropArea.querySelector("input");
+button = dropArea.querySelector("button"),
+input = document.querySelector("input");
 span = dropArea.querySelector("span");
 icon = dropArea.querySelector(".icon");
 let file; //this is a global variable and we'll use it inside multiple functions
