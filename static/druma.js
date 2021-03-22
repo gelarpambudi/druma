@@ -47,21 +47,21 @@ function showFile(){
   if(validExtensions.includes(fileType)){ //if user selected file is an image file
     dragText.style.visibility = "hidden";
     button.style.visibility = "hidden";
-    icon.style.visibility = "hidden";
+    span.style.visibility = "hidden";
     let fileReader = new FileReader(); //creating new FileReader object
     if ((fileType == validExtensions[0]) || (fileType == validExtensions[1]) || (fileType == validExtensions[2])) {
       fileReader.onload = ()=>{
         let fileURL = fileReader.result; //passing user file source in fileURL variable
         //let imgTag = document.createElement("img");
         imgTag = `<img src="${fileURL}" alt="">`; //creating an img tag and passing user selected file source inside src attribute
-        span.innerHTML = imgTag;
+        icon.innerHTML = imgTag;
       }
       fileReader.readAsDataURL(file);
     }else if (fileType == validExtensions[3]){
       fileReader.onload = ()=>{
         //let imgName = document.createElement("P");
         imgName= `<p>${fileName}</p>`; 
-        span.innerHTML = imgName;
+        icon.innerHTML = imgName;
       }
       fileReader.readAsDataURL(file);
     }
