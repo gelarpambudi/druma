@@ -22,8 +22,8 @@ class api_request(Thread):
         super(api_request, self).__init__()
 
     def run(self):
-        sess = requests.Session()
-        sess.config['keep_alive'] = True
+        sess = requests.session()
+        sess.keep_alive = True
         if self.url == URL[0]:
             r = sess.post(
                 self.url,
