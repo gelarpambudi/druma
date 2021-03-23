@@ -8,7 +8,7 @@ from image_processing import save_image
 ALLOWED_EXTENSIONS = set(['tiff', 'tif', 'jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG', 'TIF', 'TIFF'])
 URL = [
         'http://deepforest.druma.com:5555/api/predict-deepforest',
-        'http://hough.druma.com:4444/api/hough-transform'
+        'http:/hough.druma.com:4444/api/hough-transform'
         ]
 
 
@@ -22,8 +22,10 @@ class api_request(Thread):
         super(api_request, self).__init__()
 
     def run(self):
+        sess = requests.Session()
+        sess.config['keep_alive'] = True
         if self.url == URL[0]:
-            r = requests.post(
+            r = sess.post(
                 self.url,
                 files={'image': open(self.input_image, 'rb')},
                 data={'patch_size': self.patch}
@@ -31,7 +33,7 @@ class api_request(Thread):
             data = json.dumps(r.json())
             self.result = pd.read_json(data, orient='index')
         elif self.url == URL[1]:
-            r = requests.post(
+            r = sess.post(
                 self.url,
                 files={'image': open(self.input_image, 'rb')},
                 data={'patch_size': self.patch}

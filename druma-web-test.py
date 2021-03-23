@@ -41,6 +41,7 @@ def predict():
         patch_size = request.form['patch_size']
         spatial_resolution = float(request.form['spatial_resolution'])
         
+        print("file: ", file)
         if file and allowed_file(file.filename):
             img_path = save_image(file)
             
@@ -111,7 +112,7 @@ def predict():
 
             return render_template("predict.html", img_path=img_file_path, filename=final_img, box_count=box_count)
         else:
-            flash(u'Allowed image types are -> png, jpg, jpeg, tif')
+            flash(u'Allowed image types are png, jpg, jpeg, tif')
             return redirect(request.url)
 
     else:
