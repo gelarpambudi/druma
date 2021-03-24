@@ -168,4 +168,12 @@ footer {
 footer p {
     margin: 0;
   }
+
+  div#loading{
+    display: none;
+    width: 40px;
+    height: 40px;
+
+
+}
   
