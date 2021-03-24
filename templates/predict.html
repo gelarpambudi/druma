@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='predictstyle.css') }}">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <title> Druma </title>
 </head>
 <body>
@@ -51,9 +52,10 @@
           </p>
       </dl>
       <p>
-          <input type="submit" value="Upload" class="button">
+          <input type="submit" value="Upload" class="button" onclick="$('#loading').show();">
       </p>
     </form>
+    <div id="loading" style="display:none;"><img src="{{ url_for('static', filename='loading.gif') }}" alt="" />Loading!</div>
     {% if filename %}
     <table>
       <tr>
