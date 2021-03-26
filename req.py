@@ -2,6 +2,7 @@ import requests
 import json
 import pandas as pd
 import numpy as np
+from requests_toolbelt.adapters.socket_options import TCPKeepAliveAdapter
 from threading import Thread
 from image_processing import save_image
 
@@ -22,8 +23,10 @@ class api_request(Thread):
         super(api_request, self).__init__()
 
     def run(self):
+        keep_alive_conf = TCPKeepAliveAdapter(idle=120, count=20, interval=30)
         sess = requests.session()
-        sess.keep_alive = True
+        sess.mount('http://', keep_alive_conf)
+
         if self.url == URL[0]:
             r = sess.post(
                 self.url,
@@ -39,8 +42,6 @@ class api_request(Thread):
                 data={'patch_size': self.patch}
                 )
             data = json.dumps(r.json())
-            #if data is not None and json.loads(data)["lines"] != "No Line Detected":
-            #    self.result = np.array(json.loads(data)["lines"])
             self.result = pd.read_json(data, orient='index')
 
 def allowed_file(filename):
