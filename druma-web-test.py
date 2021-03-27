@@ -85,9 +85,16 @@ def predict():
                     elif box[-1] == 'green':
                         draw_box(res_image, box[:4], [0,255,0], 2)
 
+                box_count = [
+                    0 if boxes[boxes.color == 'red'].shape[0] is None else boxes[boxes.color == 'red'].shape[0],
+                    0 if boxes[boxes.color == 'yellow'].shape[0] is None else boxes[boxes.color == 'yellow'].shape[0],
+                    0 if boxes[boxes.color == 'green'].shape[0] is None else boxes[boxes.color == 'green'].shape[0]
+                ]
+
             elif detected_lines is None and boxes is not None:
                 for box in boxes[['xmin', 'ymin', 'xmax', 'ymax']].values:
                     draw_box(res_image, box, [0,255,0], 2)
+                box_count = [0, 0, boxes.shape[0]]
 
             elif detected_lines is not None and boxes is None:
                 for index, row in detected_lines.iterrows():
@@ -96,14 +103,10 @@ def predict():
                             (row["pt2"][0],row["pt2"][1]),
                             color=[255,0,0],
                             thickness=2)
+                box_count = [0,0,0]
             else:
                 pass
             
-            box_count = [
-                0 if boxes[boxes.color == 'red'].shape[0] is None else boxes[boxes.color == 'red'].shape[0],
-                0 if boxes[boxes.color == 'yellow'].shape[0] is None else boxes[boxes.color == 'yellow'].shape[0],
-                0 if boxes[boxes.color == 'green'].shape[0] is None else boxes[boxes.color == 'green'].shape[0]
-            ]
             final_img = save_res_image(res_image, file.filename)
             img_file_path = os.path.join('uploads/', final_img)
             print("=====DONE PROCESSING=====")
