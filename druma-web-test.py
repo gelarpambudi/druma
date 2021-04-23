@@ -105,7 +105,7 @@ def predict():
                             thickness=2)
                 box_count = [0,0,0]
             else:
-                pass
+                box_count = [0,0,0]
             
             final_img = save_res_image(res_image, file.filename)
             img_file_path = os.path.join('uploads/', final_img)
