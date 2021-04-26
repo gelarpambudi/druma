@@ -40,7 +40,8 @@ def predict():
         file = request.files['files']
         patch_size = request.form['patch_size']
         spatial_resolution = float(request.form['spatial_resolution'])
-        
+
+        print(patch_size, spatial_resolution)
         print("file: ", file)
         if file and allowed_file(file.filename):
             img_path = save_image(file)

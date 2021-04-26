@@ -39,11 +39,10 @@
       <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
       <header>Drag & Drop to Upload File</header>
       <span>OR</span>
-      <button>Browse File</button>
-      
+      <button type="button">Browse File</button>
     </div>
 
-      <input type="file" name="files" hidden>
+      <input class="input_file" type="file" name="files" hidden required>
       <script src="{{ url_for('static', filename='druma.js') }}"> </script> 
       <dl>
           <p>
@@ -52,7 +51,7 @@
           </p>
       </dl>
       <p>
-          <input type="submit" value="Upload" class="button" onclick="$('#loading').show();">
+          <input type="submit" value="Upload" class="button" onclick="upload();">
       </p>
     </form>
     <div id="loading"><img src="{{ url_for('static', filename='loading.gif') }}" alt="" /></div>
