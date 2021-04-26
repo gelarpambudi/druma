@@ -37,8 +37,7 @@
     <form method="post" action="" enctype="multipart/form-data">
     <div class="drag-area">
       <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-      <header>Drag & Drop to Upload File</header>
-      <span>OR</span>
+      <header>Click Here to Choose File</header>
       <button type="button">Browse File</button>
     </div>
 
@@ -51,7 +50,7 @@
           </p>
       </dl>
       <p>
-          <input type="submit" value="Upload" class="button" onclick="upload();">
+          <input type="submit" value="Upload" class="button" onclick="upload()">
       </p>
     </form>
     <div id="loading"><img src="{{ url_for('static', filename='loading.gif') }}" alt="" /></div>

@@ -1,7 +1,6 @@
 const dropArea = document.querySelector(".drag-area"),
 dragText = dropArea.querySelector("header"),
 button = dropArea.querySelector("button"),
-span = dropArea.querySelector("span");
 icon = dropArea.querySelector(".icon");
 input = document.querySelector("input");
 let file;
@@ -17,41 +16,19 @@ input.addEventListener("change", function(){
   showFile();
 });
 
-
-dropArea.addEventListener("dragover", (event)=>{
-  event.preventDefault(); //preventing from default behaviour
-  dropArea.classList.add("active");
-  dragText.textContent = "Release to Upload File";
-});
-
-
-dropArea.addEventListener("dragleave", ()=>{
-  dropArea.classList.remove("active");
-  dragText.textContent = "Drag & Drop to Upload File";
-});
-
-
-dropArea.addEventListener("drop", (event)=>{
-  event.preventDefault(); 
-  file = event.dataTransfer.files[0];
-  showFile(); 
-});
-
-function getFormData(file){
-  var formData = new FormData(document.querySelector('form'));
-  formData.set("files", file, file.name);
-  return formData
+function isEmpty(){
+  if (($('.input_form').val().length === 0) || ($('.input_file')[0].files.length === 0)) {
+    return true;
+  }else{
+    return false;
+  }
 }
 
 function upload(){
-  $('#loading').show();
-  var form = getFormData(file);
-  //document.querySelector(".input_form").closest('.input_form').remove();
-  //document.querySelector(".input_file").closest('.input_file').remove();
-  fetch('/predict', {method: "POST", body: form});
-  console.log("Request sent")
+  if (!isEmpty()){
+    $('#loading').show();
+  }
 }
-
 
 
 function showFile(){
@@ -60,7 +37,6 @@ function showFile(){
   let validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/tiff"]; //adding some valid image extensions in array
 
   if(validExtensions.includes(fileType)){ //if user selected file is an image file
-    span.style.visibility = "hidden";
     button.style.visibility = "hidden";
     icon.style.visibility = "hidden";
     let fileReader = new FileReader(); //creating new FileReader object
