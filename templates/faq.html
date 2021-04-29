@@ -30,7 +30,10 @@
           <div class="icon"><i class="fas fa-plus"></i></div>
         </label>
         <div class="content">
-          <p align="justify" >Patch size is a value that states how big the image is in the prediction process. When making a prediction, the image will be cropped to a smaller size for greater accuracy. For example, the value of the patch size is 800, then the cut of each image is 800 x 800 pixels. Note that the patch size value cannot exceed the predicted total pixel size of the image.</p>
+          <p align="justify" >Patch size is a value that states how big the image is in the prediction process. 
+            When making a prediction, the image will be cropped to a smaller size for greater accuracy. 
+            For example, the value of the patch size is 800, then the cut of each image is 800 x 800 pixels. 
+            Note that the patch size value cannot exceed the predicted total pixel size of the image.</p>
         </div>
       </div>
   
@@ -42,7 +45,10 @@
           <div class="icon"><i class="fas fa-plus"></i></div>
         </label>
         <div class="content">
-          <p align="justify">Spatial resolution is the smallest size of objects in the field that can be recorded on digital data and images. In this product, the unit used is meters. If the input spatial resolution is 10, then one pixel in the image means 10 x 10 meters in field. Usually, when you use images from satellite and UAV, the spatial resolution value of the image is known. This value will be used to calculate the distance from the power line to the tree.</p>
+          <p align="justify">Spatial resolution is the smallest size of objects in the field that can be recorded on digital data and images. 
+            In this product, the unit used is meters. If the input spatial resolution is 10, then one pixel in the image means 10 x 10 meters in the field. 
+            Usually, when you use images from satellite and UAV, the spatial resolution value of the image is known. 
+            This value will be used to calculate the distance from the power line to the tree.</p>
         </div>
       </div>
       <!-- Accordion Heading Three -->
@@ -53,7 +59,11 @@
           <div class="icon"><i class="fas fa-plus"></i></div>
         </label>
         <div class="content">
-          <p align="justify">You can try changing the value of the patch size. The smaller the patch size, the detection results are seen from a smaller visibility and the detection results are sometimes too detail (predicting too many tree crowns, even though there is only one tree crown). Therefore, for large images above 1000 x 1000 pixels, a 1000px patch size can be tried first. If the prediction results are considered too general (not detail enough), then the patch size can be reduced. If the prediction results are too detailed, the patch size can be enlarged. For images below 1000 x 1000 pixels, the prediction can be tried starting from 500px and can be adjusted further the same as in the previous case. Noted that the patch size cannot exceed the image size. From our experimental results, patch size 700-800 px is a good value to predict an image.</p>
+          <p align="justify">You can try changing the value of the patch size. 
+            The smaller the patch size, the detection results are seen from smaller visibility and the detection results are sometimes too detail (predicting too many tree crowns, even though there is only one tree crown). 
+            Therefore, for large images above 1000 x 1000 pixels, a 1000px patch size can be tried first. If the prediction results are considered too general (not detail enough), then the patch size can be reduced. 
+            If the prediction results are too detailed, the patch size can be enlarged. For images below 1000 x 1000 pixels, the prediction can be tried starting from 500px and can be adjusted further the same as in the previous case. 
+            Noted that the patch size cannot exceed the image size. From our experimental results, patch size 700-800 px is a good value to predict an image.</p>
         </div>
       </div>
       <!-- Accordion Heading Four -->
@@ -64,7 +74,10 @@
           <div class="icon"><i class="fas fa-plus"></i></div>
         </label>
         <div class="content">
-          <p align="justify">ISI SENDIRI. The smaller the patch size, the detection results are seen from a smaller visibility and the detection results are sometimes too accurate (predicting too many tree crowns, even though there is only one tree crown). Therefore, for large images above 1000 x 1000 pixels, a 1000px patch size can be tried first. If the prediction results are considered too general (not accurate), then the patch size can be reduced. If the prediction results are too detailed, the patch size can be enlarged. For images below 1000 x 1000 pixels, the prediction can be tried starting from 500px and can be adjusted further the same as in the previous case. Noted that the patch size cannot exceed the image size. From our experimental results, patch size 700-800 px is a good value to predict an image.</p>
+          <p align="justify">Generally, a higher resolution image will have a better prediction result. 
+            We recommend using image with at least 1920x1080 HD resolution. 
+            In addition, the camera height when the image is taken will also affect the prediction result.
+            Lower camera height will give a better prediction. Our recommendation is to use images taken from 300 meter above ground at most.</p>
         </div>
       </div>	  
     </div>
