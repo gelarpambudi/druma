@@ -179,4 +179,9 @@ footer p {
     margin-right:auto;
     margin-bottom: 50px;
   }
+
+  ::placeholder {
+    font-size: 0.9em;
+  
+  }
   
