@@ -184,4 +184,10 @@ footer p {
     font-size: 0.9em;
   
   }
+
+canvas{
+  min-height: 60px;
+  display: block;
+}
+
   
