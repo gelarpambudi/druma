@@ -17,11 +17,11 @@ input.addEventListener("change", function(){
 });
 
 function isEmpty(){
-  if (($('.input_form').val().length === 0) || ($('.input_file')[0].files.length === 0)) {
-    return true;
-  }else{
-    return false;
-  }
+    if (($('.input_form').val().length === 0) || ($('.input_file')[0].files.length === 0)) {
+      return true;
+    }else{
+      return false;
+    }
 }
 
 function upload(){
@@ -29,7 +29,6 @@ function upload(){
     $('#loading').show();
   }
 }
-
 
 function showFile(){
   let fileType = file.type; 

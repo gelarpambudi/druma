@@ -38,8 +38,15 @@ def predict():
             return redirect(request.url)
 
         file = request.files['files']
-        patch_size = request.form['patch_size']
+        patch_size = int(request.form['patch_size'])
         spatial_resolution = float(request.form['spatial_resolution'])
+
+        if (patch_size>0 and patch_size<100):
+            flash(u'Patch size must be at least 100')
+            return redirect(request.url)
+        if (spatial_resolution <= 0 ):
+            flash(u'Spatial resolution cannot be 0 or negative')
+            return redirect(request.url)
 
         print(patch_size, spatial_resolution)
         print("file: ", file)
