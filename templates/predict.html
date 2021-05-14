@@ -86,7 +86,6 @@
                                   var tiff = new Tiff({buffer: xhr.response});
                                   var canvas = tiff.toCanvas();
                                   document.getElementById("tif_canvas").appendChild(canvas);
-                                  //document.body.appendChild(canvas);
                               };
               xhr.send(null);
           </script>
