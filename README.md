@@ -45,8 +45,8 @@ Each sub-system will be deployed in different VM with following specification:
 
 ## Authors
 
-[Gelar Pambudi Adhiluhung](https://github.com/gelarpambudi) 
-[Karisa Ardelia Hanifah](https://github.com/karisaardelia)
+* [Gelar Pambudi Adhiluhung](https://github.com/gelarpambudi) 
+* [Karisa Ardelia Hanifah](https://github.com/karisaardelia)
 
 ## Acknowledgments
 
