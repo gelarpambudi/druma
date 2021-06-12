@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from app import app
 
 DANGER_DIST = 15
-CAUTION_DIST = 20
+CAUTION_DIST = 25
 
 def load_image_as_np(img_file):
     img = cv.imread(img_file)
